@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-lab-01
+
+server:
+  port: 8080
+
+app:
+  owner: Anel
+  group: 2401-IS
+  date-pattern: "yyyy-MM-dd HH:mm:ss"
+  mail:
+    from: no-reply@iitu.kz
+    retry-count: 3
+    timeout: 5s
+    enabled: true
+
+logging:
+  level:
+    kz.iitu: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,env,configprops,conditions
