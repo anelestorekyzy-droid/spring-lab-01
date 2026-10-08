@@ -6,42 +6,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-@RestController
+//@RestController
 @RequestMapping("/api/lab3")
 public class Lab3Controller {
 
-    private final AppProperties appProperties;
+    private final AppProperties props;
     private final Environment environment;
-    private final String banner;
 
-    public Lab3Controller(
-            AppProperties appProperties,
-            Environment environment,
-            String banner
-    ) {
-        this.appProperties = appProperties;
+    public Lab3Controller(AppProperties props, Environment environment) {
+        this.props = props;
         this.environment = environment;
-        this.banner = banner;
     }
 
     @GetMapping("/config")
     public Map<String, Object> config() {
-        Map<String, Object> result = new LinkedHashMap<>();
-
-        result.put("owner", appProperties.owner());
-        result.put("group", appProperties.group());
-        result.put("mailFrom", appProperties.mail().from());
-        result.put("retryCount", appProperties.mail().retryCount());
-        result.put("timeout", appProperties.mail().timeout());
-        result.put("enabled", appProperties.mail().enabled());
-        result.put("serverPort", environment.getProperty("server.port"));
-        result.put("activeProfiles",
-                Arrays.asList(environment.getActiveProfiles()));
-        result.put("banner", banner);
-
-        return result;
+        return Map.of(
+                "owner", props.owner(),
+                "group", props.group(),
+                "mailFrom", props.mail().from(),
+                "retryCount", props.mail().retryCount(),
+                "timeout", props.mail().timeout().toString(),
+                "enabled", props.mail().enabled(),
+                "defaultLocale", props.locale().defaultLocale(),
+                "supportedLocales", props.locale().supported(),
+                "serverPort", environment.getProperty("server.port", "8080"),
+                "activeProfiles", Arrays.asList(environment.getActiveProfiles())
+        );
     }
 }

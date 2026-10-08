@@ -5,12 +5,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.Duration;
+import java.util.List;
 
 @Validated
 @ConfigurationProperties(prefix = "app")
@@ -22,7 +25,10 @@ public record AppProperties(
         String group,
 
         @Valid
-        Mail mail
+        Mail mail, // <-- Осы жерде ҮТІР (,) ұмытылған еді
+
+        @Valid
+        Locale locale
 ) {
 
     public record Mail(
@@ -38,6 +44,15 @@ public record AppProperties(
             Duration timeout,
 
             boolean enabled
+    ) {}
+
+    public record Locale(
+            @Pattern(regexp = "ru|kk|en")
+            @DefaultValue("kk")
+            String defaultLocale,
+
+            @Size(min = 1)
+            List<String> supported
     ) {
     }
 }

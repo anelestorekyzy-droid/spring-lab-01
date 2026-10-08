@@ -5,6 +5,8 @@ app:
   mail:
     enabled: false
     retry-count: 1
+  locale:
+    default-locale: "ru"
 
 logging:
   level:

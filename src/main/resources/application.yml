@@ -14,6 +14,12 @@ app:
     retry-count: 3
     timeout: 5s
     enabled: true
+  locale:
+    default-locale: "kk"
+    supported:
+      - "kk"
+      - "ru"
+      - "en"
 
 logging:
   level:
