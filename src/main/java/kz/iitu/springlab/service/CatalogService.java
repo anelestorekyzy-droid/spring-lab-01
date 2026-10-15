@@ -38,14 +38,14 @@ public class CatalogService {
         return "Removed item no. " + id;
     }
 
-    // 4.3 Тапсырма: Self-invocation (аспектілер іске қосылмайды)
+
     public String removeTwice(long id) {
         String first  = remove(id);      // this арқылы шақыру -> проксиді айналып өтеді
         String second = remove(id + 1);  // Аспектілер орындалмайды
         return first + "; " + second;
     }
 
-    // 4.5 Тапсырма: Түзетілген нұсқасы (self арқылы прокси шақырылады)
+
     public String removeTwiceFixed(long id) {
         String first  = self.remove(id);     // Прокси арқылы шақырылады
         String second = self.remove(id + 1); // Аспектілер іске қосылады
