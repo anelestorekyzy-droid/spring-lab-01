@@ -1,6 +1,8 @@
+
 package kz.iitu.springlab.catalog;
 
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,13 +12,26 @@ import java.util.concurrent.atomic.AtomicLong;
 @Repository
 public class BookRepository {
 
-    private final Map<Long, Book> storage = new ConcurrentHashMap<>();
+    private final Map<Long, Book> storage =
+            new ConcurrentHashMap<>();
+
     private final AtomicLong sequence = new AtomicLong();
 
     public BookRepository() {
-        save(new Book(null, "Effective Java", "Joshua Bloch", 2018));
-        save(new Book(null, "Clean Code", "Robert Martin", 2008));
-        save(new Book(null, "Spring in Action", "Craig Walls", 2022));
+        save(new Book(
+                null, "Effective Java",
+                "Joshua Bloch", 2018, "admin"
+        ));
+
+        save(new Book(
+                null, "Clean Code",
+                "Robert Martin", 2008, "user"
+        ));
+
+        save(new Book(
+                null, "Spring in Action",
+                "Craig Walls", 2022, "user"
+        ));
     }
 
     public List<Book> findAll() {
@@ -28,8 +43,18 @@ public class BookRepository {
     }
 
     public Book save(Book book) {
-        long id = book.id() != null ? book.id() : sequence.incrementAndGet();
-        Book stored = new Book(id, book.title(), book.author(), book.year());
+        long id = book.id() != null
+                ? book.id()
+                : sequence.incrementAndGet();
+
+        Book stored = new Book(
+                id,
+                book.title(),
+                book.author(),
+                book.year(),
+                book.owner()
+        );
+
         storage.put(id, stored);
         return stored;
     }

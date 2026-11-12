@@ -6,18 +6,48 @@
     <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body>
-<h1 th:text="${title}">Catalogue</h1>
+<div class="container">
+    <h1 th:text="${title}">Catalogue</h1>
 
-<p th:if="${message}" class="flash" th:text="${message}"></p>
+    <!-- Сәтті қосылған кезде шығатын хабарлама (Flash message) -->
+    <p th:if="${message}" class="flash" th:text="${message}"></p>
 
-<table>
-    <tr><th>#</th><th>Title</th><th>Author</th><th>Year</th></tr>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.id}">1</td>
-        <td th:text="${book.title}">Title</td>
-        <td th:text="${book.author}">Author</td>
-        <td th:text="${book.year}">2020</td>
-    </tr>
-</table>
+    <!-- Автор бойынша іздеу (Сүзгі) -->
+    <form method="get" action="/books" style="margin-bottom: 20px;">
+        <input type="text" name="author" th:value="${author}" placeholder="Filter by author...">
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Кітаптар кестесі -->
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}">1</td>
+            <td th:text="${book.title}">Title</td>
+            <td th:text="${book.author}">Author</td>
+            <td th:text="${book.year}">2020</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Жаңа кітап қосу формасы (POST /books) -->
+    <div class="form-group">
+        <h3>Add New Book</h3>
+        <form method="post" action="/books">
+            <input type="text" name="title" placeholder="Book Title" required>
+            <input type="text" name="author" placeholder="Author Name" required>
+            <input type="number" name="year" placeholder="Year" required>
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

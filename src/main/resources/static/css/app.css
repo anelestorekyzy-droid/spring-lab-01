@@ -1,30 +1,120 @@
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --border-color: #e2e8f0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
 }
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
 h1 {
-    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
 }
+
+/* Flash хабарлама (Қосылды деген хабар) */
+.flash {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #a7f3d0;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Кесте стилі */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
 }
+
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    padding: 14px 16px;
     text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
+
 th {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
 }
-.flash {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 12px;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
+
+tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Формалар мен батырмалар */
+.form-group {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f1f5f9;
+    border-radius: 8px;
+}
+
+.form-group h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #334155;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 10px 14px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    width: 220px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: var(--primary-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
 }
