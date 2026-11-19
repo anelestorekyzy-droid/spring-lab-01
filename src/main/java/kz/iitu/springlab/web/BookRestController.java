@@ -1,10 +1,15 @@
+
 package kz.iitu.springlab.web;
 
 import kz.iitu.springlab.catalog.Book;
 import kz.iitu.springlab.catalog.BookService;
 
+import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 import java.util.List;
@@ -37,15 +42,19 @@ public class BookRestController {
 
         return service.findById(id)
                 .map(ResponseEntity::ok)
-                .orElseGet(() ->
-                        ResponseEntity.notFound().build());
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Book not found: " + id
+                        )
+                );
     }
 
     // POST - жаңа кітап қосу
     // Кітаптың иесі автоматты түрде анықталады
     @PostMapping
     public ResponseEntity<Book> create(
-            @RequestBody Book book) {
+            @Valid @RequestBody Book book) {
 
         Book saved = service.create(book);
 

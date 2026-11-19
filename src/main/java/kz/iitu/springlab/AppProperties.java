@@ -25,7 +25,7 @@ public record AppProperties(
         String group,
 
         @Valid
-        Mail mail, // <-- Осы жерде ҮТІР (,) ұмытылған еді
+        Mail mail,
 
         @Valid
         Locale locale
